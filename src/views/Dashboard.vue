@@ -1,5 +1,7 @@
 <template>
-  <HelloWorld />
+  <layout-default>
+    <HelloWorld />
+  </layout-default>
 </template>
 
 <script>
