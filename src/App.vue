@@ -1,19 +1,11 @@
 <template>
-  <v-app>
-    <router-view></router-view>
-    <global-snackbar />
-  </v-app>
+  <router-view></router-view>
 </template>
 
 <script>
-import GlobalSnackbar from './components/GlobalSnackbar.vue'
 
 export default {
   name: 'App',
-
-  components: {
-    GlobalSnackbar
-  },
 
   data() {
     return {

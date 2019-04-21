@@ -1,15 +1,11 @@
 <template>
-  <layout-default>
-    <HelloWorld />
-  </layout-default>
+  <layout-app-default>
+    <router-link to="/trips">Trips</router-link>
+  </layout-app-default>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld'
-
 export default {
-  components: {
-    HelloWorld
-  }
+
 }
 </script>

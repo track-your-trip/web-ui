@@ -42,7 +42,7 @@ export default {
           .then(res => {
             let token = res.data.access_token
             localStorage.setItem('token', token)
-            axios.defaults.headers.common['Authorization'] = token
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 
             commit('success', token)
             resolve(res)

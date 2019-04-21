@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant.sync="mini"
-      hide-overlay
+      fixed
       clipped
       app
     >
-      <v-list dense>
-        <v-list-tile>
+      <v-list>
+        <v-list-tile to="/">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -16,33 +16,44 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+
+        <v-list-tile to="/trips">
+          <v-list-tile-action>
+            <v-icon>fas fa-map</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Trips</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark app>
+
+    <v-toolbar color="primary" dark fixed clipped-left app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Track Your Trip</v-toolbar-title>
     </v-toolbar>
+
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <v-flex text-xs-center>
-            <slot />
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <slot />
+      <global-snackbar />
     </v-content>
-    <v-footer color="indigo" app>
-      <span class="white--text">&copy; 2019 - Nico Schreiner</span>
-    </v-footer>
-  </div>
+  </v-app>
 </template>
 
 <script>
+import GlobalSnackbar from '../components/GlobalSnackbar.vue'
+
 export default {
+
+  components: {
+    GlobalSnackbar
+  },
+
   data: () => ({
     drawer: true,
     mini: true
   }),
+
   props: {
     source: String
   }
