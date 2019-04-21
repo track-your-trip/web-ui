@@ -1,14 +1,14 @@
 <template>
   <div>
     <v-navigation-drawer
-        v-model="drawer"
-        :mini-variant.sync="mini"
-        hide-overlay
-        clipped
-        app
-      >
+      v-model="drawer"
+      :mini-variant.sync="mini"
+      hide-overlay
+      clipped
+      app
+    >
       <v-list dense>
-        <v-list-tile @click="">
+        <v-list-tile>
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -24,10 +24,7 @@
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
-        <v-layout
-          justify-center
-          align-center
-        >
+        <v-layout justify-center align-center>
           <v-flex text-xs-center>
             <slot />
           </v-flex>
