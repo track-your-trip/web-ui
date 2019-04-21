@@ -21,6 +21,10 @@ export default {
     }
   },
 
+  mounted() {
+    this.$store.dispatch('settings/load')
+  },
+
   created() {
     /*
     this.$axios.interceptors.response.use(undefined, err => {
