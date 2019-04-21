@@ -62,10 +62,10 @@ export default {
         axios
           .post(process.env.VUE_APP_API_URL + '/logout')
           .then(res => {
-            resolve()
+            resolve(res)
           })
           .catch(err => {
-            resolve()
+            reject(err)
           })
       })
     }

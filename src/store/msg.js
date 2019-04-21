@@ -20,7 +20,7 @@ export default {
   },
 
   actions: {
-    show({ commit, state }, data) {
+    show({ commit }, data) {
       commit('show', data)
     }
   },
