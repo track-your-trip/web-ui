@@ -18,18 +18,18 @@
                     >Incorrect username or password</v-alert
                   >
                   <ValidationProvider
-                    ref="providerUsername"
-                    rules="required"
-                    name="Username"
+                    ref="providerEmail"
+                    rules="required|email"
+                    name="E-Mail"
                     v-slot="{ errors }"
                   >
                     <v-text-field
-                      v-model="username"
+                      v-model="email"
                       :disabled="loading"
                       :error-messages="errors"
-                      prepend-icon="person"
-                      name="username"
-                      label="Username"
+                      prepend-icon="email"
+                      name="email"
+                      label="E-Mail"
                       type="text"
                     />
                   </ValidationProvider>
@@ -53,6 +53,14 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
+                <v-expand-transition>
+                  <router-link
+                    to="/register"
+                    class="ml-3"
+                    v-if="$store.getters['settings/register']"
+                    >Don't have an account yet? Register here</router-link
+                  >
+                </v-expand-transition>
                 <v-spacer />
                 <v-btn
                   color="primary"
@@ -81,7 +89,7 @@ export default {
 
   data() {
     return {
-      username: '',
+      email: '',
       password: ''
     }
   },
@@ -101,7 +109,7 @@ export default {
 
       if (!isValid) return
 
-      let username = this.username
+      let username = this.email
       let password = this.password
 
       this.$store

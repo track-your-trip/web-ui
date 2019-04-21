@@ -17,6 +17,9 @@ export default {
       state.status = 'success'
       state.token = token
     },
+    registerSuccess(state) {
+      state.status = 'success'
+    },
     error(state) {
       state.status = 'error'
     },
@@ -65,6 +68,27 @@ export default {
             resolve(res)
           })
           .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    register({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        commit('request')
+
+        axios
+          .post(process.env.VUE_APP_API_URL + '/register', {
+            name: user.name,
+            email: user.email,
+            password: user.password
+          })
+          .then(res => {
+            commit('registerSuccess')
+            resolve(res)
+          })
+          .catch(err => {
+            commit('error')
             reject(err)
           })
       })

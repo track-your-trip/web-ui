@@ -37,7 +37,7 @@ export default {
             reject(err)
           })
       })
-    },
+    }
   },
 
   getters: {
