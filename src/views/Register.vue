@@ -84,7 +84,7 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <router-link to="/login" class="ml-3"
+                  <router-link :to="{ name: 'login' }" class="ml-3"
                     >Already have an account? Login here</router-link
                   >
                   <v-spacer />
@@ -107,6 +107,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import MessagesUtils from '../utils/messages'
 
 export default {
   components: {
@@ -148,9 +149,7 @@ export default {
           this.$router.push('/login')
         })
         .catch(err => {
-          this.$store.dispatch('msg/show', {
-            message: 'There was an error while registering'
-          })
+          MessagesUtils.showGenericErrorNotification();
         })
     }
   }

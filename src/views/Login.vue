@@ -56,7 +56,7 @@
                 <v-card-actions>
                   <v-expand-transition>
                     <router-link
-                      to="/register"
+                      :to="{ name: 'register' }"
                       class="ml-3"
                       v-if="$store.getters['settings/register']"
                       >Don't have an account yet? Register here</router-link
@@ -121,7 +121,9 @@ export default {
         })
         .catch(err => {
           if (err.response.status !== 401) {
-            this.$store.dispatch('msg/show', { message: err })
+            this.$dialog.notify.error(err, {
+              position: 'top-right'
+            })
           }
         })
     }

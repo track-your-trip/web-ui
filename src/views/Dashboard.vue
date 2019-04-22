@@ -1,11 +1,9 @@
 <template>
   <layout-app-default>
-    <router-link to="/trips">Trips</router-link>
+    <router-link :to="{ name: 'trips' }">Trips</router-link>
   </layout-app-default>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import TripUtils from '../utils/trips.js'
 
 export default {
   namespaced: true,
@@ -12,47 +13,69 @@ export default {
     request(state) {
       state.status = 'loading'
     },
-    trips(state, trips) {
+    success(state) {
       state.status = 'success'
-      state.trips = trips
     },
     error(state) {
       state.status = 'error'
+    },
+    setTrips(state, trips) {
+      state.trips = trips
+    },
+    addTrip(state, trip) {
+      state.trips.push(trip)
+    },
+    updateTrip(state, trip) {
+      let index = state.trips.findIndex(e => e.id === trip.id)
+      state.trips[index] = trip
+    },
+    removeTrip(state, id) {
+      let index = state.trips.findIndex(e => e.id === id)
+      state.trips.splice(index, 1)
     }
   },
 
   actions: {
     load({ commit }) {
+      commit('request')
+      TripUtils.list()
+        .then(trips => {
+          commit('setTrips', trips)
+          commit('success')
+        })
+        .catch(() => commit('error'))
+    },
+
+    add({ commit, dispatch }, trip) {
       return new Promise((resolve, reject) => {
         commit('request')
 
-        axios
-          .get(process.env.VUE_APP_API_URL + '/trips')
-          .then(res => {
-            commit('trips', res.data.data)
-            resolve(res)
-          })
-          .catch(err => {
-            commit('error')
-            reject(err)
-          })
+        TripUtils.store(trip).then(trip => {
+          commit('addTrip', trip)
+          commit('success')
+          resolve(trip)
+        })
+      })
+    },
+
+    update({ commit, dispatch }, trip) {
+      return new Promise((resolve, reject) => {
+        commit('request')
+
+        TripUtils.update(trip).then(trip => {
+          commit('updateTrip', trip)
+          commit('success')
+          resolve(trip)
+        })
       })
     },
 
     delete({ commit, dispatch }, id) {
-      return new Promise((resolve, reject) => {
-        commit('request')
+      commit('request')
 
-        axios
-          .delete(process.env.VUE_APP_API_URL + '/trips/' + id)
-          .then(res => {
-            dispatch('load')
-            resolve(res)
-          })
-          .catch(err => {
-            commit('error')
-            reject(err)
-          })
+      TripUtils.destroy(id).then(() => {
+        commit('removeTrip', id)
+        commit('success')
       })
     }
   },

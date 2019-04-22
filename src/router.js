@@ -5,7 +5,7 @@ import store from './store.js'
 import Dashboard from './views/Dashboard.vue'
 
 import Trips from './views/Trips.vue'
-import TripCreate from './views/TripCreate.vue'
+import Trip from './views/Trip.vue'
 
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
@@ -17,13 +17,19 @@ let router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    { path: '/', component: Dashboard },
+    { path: '/dashboard', name: 'dashboard', component: Dashboard },
 
-    { path: '/trips', component: Trips },
-    { path: '/trips/create', component: TripCreate },
+    { path: '/trips', name: 'trips', component: Trips },
+    { path: '/trips/create', name: 'trip-create', component: Trip },
+    { path: '/trips/:id', name: 'trip', component: Trip },
 
-    { path: '/login', component: Login, meta: { public: true } },
-    { path: '/register', component: Register, meta: { public: true } },
+    { path: '/login', name: 'login', component: Login, meta: { public: true } },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+      meta: { public: true }
+    },
     { path: '*', component: NotFound, meta: { public: true } }
   ]
 })

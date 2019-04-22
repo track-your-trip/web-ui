@@ -21,18 +21,29 @@
         <template v-slot:items="props">
           <td class="text-xs-left">{{ props.item.name }}</td>
           <td class="text-xs-left">{{ props.item.description }}</td>
-          <td class="justify-center">
-            <v-icon small class="mr-2" @click="editTrip(props.item)"
-              >edit</v-icon
+          <td class="text-xs-left">
+            <v-btn
+              flat
+              small
+              icon
+              :to="{ name: 'trip', params: { id: props.item.id } }"
             >
-            <v-icon small @click="deleteTrip(props.item)">delete</v-icon>
+              <v-icon small>remove_red_eye</v-icon>
+            </v-btn>
+            <v-btn flat small icon @click="deleteTrip(props.item)">
+              <v-icon small>delete</v-icon>
+            </v-btn>
           </td>
         </template>
         <template v-slot:no-data>
-          <router-link to="/trips/create">Add your first trip</router-link>
+          <div class="text-xs-center">
+            <router-link :to="{ name: 'trip-create' }"
+              >Add your first trip</router-link
+            >
+          </div>
         </template>
       </v-data-table>
-      <v-btn color="primary" to="/trips/create">Add Trip</v-btn>
+      <v-btn color="primary" :to="{ name: 'trip-create' }">Add Trip</v-btn>
     </v-card-text>
   </v-card>
 </template>
@@ -51,13 +62,20 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('trips/load')
+    this.loadTrips()
   },
 
   methods: {
-    deleteTrip(trip) {
+    loadTrips() {
+      this.$store.dispatch('trips/load')
+    },
+
+    async deleteTrip(trip) {
       if (
-        confirm('Would you really like to delete the trip "' + trip.name + '"?')
+        await this.$dialog.warning({
+          text: 'Would you really like to delete the trip "' + trip.name + '"?',
+          title: 'Confirm deletion'
+        })
       ) {
         this.$store.dispatch('trips/delete', trip.id)
       }
