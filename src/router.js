@@ -17,6 +17,7 @@ let router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    { path: '/', redirect: { name: 'dashboard' } },
     { path: '/dashboard', name: 'dashboard', component: Dashboard },
 
     { path: '/trips', name: 'trips', component: Trips },
