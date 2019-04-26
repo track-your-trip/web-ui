@@ -30,6 +30,9 @@
             >
               <v-icon small>remove_red_eye</v-icon>
             </v-btn>
+            <v-btn flat small icon @click="shareTrip(props.item)">
+              <v-icon small>share</v-icon>
+            </v-btn>
             <v-btn flat small icon @click="deleteTrip(props.item)">
               <v-icon small>delete</v-icon>
             </v-btn>
@@ -79,6 +82,10 @@ export default {
       ) {
         this.$store.dispatch('trips/delete', trip.id)
       }
+    },
+
+    shareTrip(trip) {
+      console.log("Share Trip", trip)
     }
   }
 }
