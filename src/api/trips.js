@@ -71,7 +71,7 @@ export default {
     return new Promise((resolve, reject) => {
       axios
         .delete(process.env.VUE_APP_API_URL + '/trips/' + id)
-        .then(res => {
+        .then(() => {
           resolve()
         })
         .catch(err => {

@@ -21,7 +21,6 @@ let router = new Router({
     { path: '/dashboard', name: 'dashboard', component: Dashboard },
 
     { path: '/trips', name: 'trips', component: Trips },
-    { path: '/trips/create', name: 'trip-create', component: Trip },
     { path: '/trips/:id', name: 'trip', component: Trip },
 
     { path: '/login', name: 'login', component: Login, meta: { public: true } },

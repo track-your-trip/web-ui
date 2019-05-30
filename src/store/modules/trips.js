@@ -45,37 +45,51 @@ export default {
         .catch(() => commit('error'))
     },
 
-    add({ commit, dispatch }, trip) {
+    add({ commit }, trip) {
       return new Promise((resolve, reject) => {
         commit('request')
 
-        TripApi.store(trip).then(trip => {
-          commit('addTrip', trip)
-          commit('success')
-          resolve(trip)
-        })
+        TripApi.store(trip)
+          .then(trip => {
+            commit('addTrip', trip)
+            commit('success')
+            resolve(trip)
+          })
+          .catch(() => {
+            commit('error')
+            reject()
+          })
       })
     },
 
-    update({ commit, dispatch }, trip) {
+    update({ commit }, trip) {
       return new Promise((resolve, reject) => {
         commit('request')
 
-        TripApi.update(trip).then(trip => {
-          commit('updateTrip', trip)
-          commit('success')
-          resolve(trip)
-        })
+        TripApi.update(trip)
+          .then(trip => {
+            commit('updateTrip', trip)
+            commit('success')
+            resolve(trip)
+          })
+          .catch(() => {
+            commit('error')
+            reject()
+          })
       })
     },
 
-    delete({ commit, dispatch }, id) {
+    delete({ commit }, id) {
       commit('request')
 
-      TripApi.destroy(id).then(() => {
-        commit('removeTrip', id)
-        commit('success')
-      })
+      TripApi.destroy(id)
+        .then(() => {
+          commit('removeTrip', id)
+          commit('success')
+        })
+        .catch(() => {
+          commit('error')
+        })
     }
   },
 

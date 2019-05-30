@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import LocationsApi from '~/api/locations.js'
-
 export default {
   props: {
     location: {

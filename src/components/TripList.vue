@@ -46,13 +46,24 @@
           </div>
         </template>
       </v-data-table>
-      <v-btn color="primary" :to="{ name: 'trip-create' }">Add Trip</v-btn>
+
+      <trip-details-dialog @save="onAddTrip">
+        <template v-slot:default="{ on }">
+          <v-btn color="primary" v-on="on">Add Trip</v-btn>
+        </template>
+      </trip-details-dialog>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import TripDetailsDialog from '~/components/TripDetailsDialog.vue'
+
 export default {
+  components: {
+    TripDetailsDialog
+  },
+
   data() {
     return {
       headers: [
@@ -69,6 +80,12 @@ export default {
   },
 
   methods: {
+    onAddTrip(trip) {
+      this.$store.dispatch('trips/add', trip).then(trip => {
+        this.$router.push({ name: 'trip', params: { id: trip.id } })
+      })
+    },
+
     loadTrips() {
       this.$store.dispatch('trips/load')
     },

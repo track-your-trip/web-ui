@@ -5,12 +5,16 @@
     width="500"
     :fullscreen="$vuetify.breakpoint.xsOnly"
   >
+    <template v-slot:activator="{ on }">
+      <slot :on="on" />
+    </template>
+
     <v-card id="toolbar">
       <ValidationObserver ref="observer" v-slot="{ invalid }">
         <v-toolbar dark color="primary">
           <v-toolbar-title>Details</v-toolbar-title>
           <v-spacer />
-          <v-btn icon dark @click="close" v-if="modeEdit">
+          <v-btn icon dark @click="onClickCancel">
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -22,7 +26,7 @@
               v-slot="{ errors }"
             >
               <v-text-field
-                v-model="value.name"
+                v-model="name"
                 :error-messages="errors"
                 name="name"
                 label="Name"
@@ -34,7 +38,7 @@
               v-slot="{ errors }"
             >
               <v-textarea
-                v-model="value.description"
+                v-model="description"
                 :error-messages="errors"
                 name="description"
                 label="Description"
@@ -45,14 +49,11 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" :to="{ name: 'trips' }" v-if="modeNew"
-            >Cancel</v-btn
-          >
+          <v-btn color="primary" @click="onClickCancel">{{ textCancel }}</v-btn>
           <v-spacer />
-          <v-btn color="primary" :disabled="invalid" @click="save">
-            <span v-if="modeNew">Save</span>
-            <span v-else>Update</span>
-          </v-btn>
+          <v-btn color="primary" :disabled="invalid" @click="onClickSave">{{
+            textSave
+          }}</v-btn>
         </v-card-actions>
       </ValidationObserver>
     </v-card>
@@ -61,7 +62,6 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import MessagesUtils from '../utils/messages'
 
 export default {
   components: {
@@ -70,64 +70,60 @@ export default {
   },
 
   props: {
-    value: Object
+    trip: {
+      type: Object,
+      required: false
+    },
+    textCancel: {
+      type: String,
+      default: 'Cancel'
+    },
+    textSave: {
+      type: String,
+      default: 'Save'
+    }
   },
 
   data() {
     return {
-      dialog: false
+      dialog: false,
+      name: '',
+      description: ''
     }
   },
 
-  computed: {
-    mode() {
-      return this.value.id ? 'EDIT' : 'NEW'
-    },
+  watch: {
+    dialog(val) {
+      console.log(val ? 'open' : 'close')
 
-    modeEdit() {
-      return this.mode === 'EDIT'
-    },
-
-    modeNew() {
-      return this.mode === 'NEW'
+      if (val) {
+        // Dialog open
+        if (this.trip) {
+          this.name = this.trip.name
+          this.description = this.trip.description
+        }
+      }
     }
   },
 
   methods: {
-    async save() {
+    onClickCancel() {
+      this.$emit('cancel')
+      this.dialog = false
+    },
+
+    async onClickSave() {
       const isValid = await this.$refs.observer.validate()
       if (!isValid) return
 
-      if (this.modeNew) {
-        this.$store
-          .dispatch('trips/add', this.value)
-          .then(trip => {
-            console.log(trip)
-            this.$emit('input', trip)
-            this.close()
-          })
-          .catch(err => {
-            console.log(err)
-            MessagesUtils.showGenericErrorNotification()
-          })
-      } else {
-        this.$store
-          .dispatch('trips/update', this.value)
-          .then(trip => {
-            console.log(trip)
-            this.$emit('input', trip)
-            this.close()
-          })
-          .catch(err => {
-            console.log(err)
-            MessagesUtils.showGenericErrorNotification()
-          })
-      }
-    },
-    open() {
-      this.dialog = true
-    },
-    close() {
+      this.$emit(
+        'save',
+        Object.assign(this.trip || {}, {
+          name: this.name,
+          description: this.description
+        })
+      )
+
       this.dialog = false
     }
   }
