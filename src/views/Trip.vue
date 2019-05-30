@@ -84,7 +84,7 @@ export default {
   methods: {
     initNewTrip() {
       this.trip = {}
-      this.openTripDetails()
+      this.onEditTrip()
     },
 
     loadTrip() {
