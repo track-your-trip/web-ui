@@ -16,11 +16,7 @@ import {
 } from '@fortawesome/vue-fontawesome'
 
 // fontawesome solid icons
-library.add(
-  fasUserTie,
-  fasMap,
-  fasMapMarked
-)
+library.add(fasUserTie, fasMap, fasMapMarked)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)

@@ -8,14 +8,8 @@
     <trip-details-dialog ref="refTripDetailsDialog" v-model="trip" />
 
     <template v-slot:drawerRight>
-      <v-timeline
-        align-top
-        dense
-      >
-        <v-timeline-item
-          color="pink"
-          small
-        >
+      <v-timeline align-top dense>
+        <v-timeline-item color="pink" small>
           <v-layout pt-3>
             <v-flex xs3>
               <strong>5pm</strong>
@@ -27,10 +21,7 @@
           </v-layout>
         </v-timeline-item>
 
-        <v-timeline-item
-          color="teal lighten-3"
-          small
-        >
+        <v-timeline-item color="teal lighten-3" small>
           <v-layout wrap pt-3>
             <v-flex xs3>
               <strong>3-4pm</strong>
@@ -44,7 +35,6 @@
                 ></v-img>
               </v-avatar>
               <v-avatar>
-
                 <v-img
                   src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairFrizzle&accessoriesType=Prescription02&hairColor=Black&facialHairType=MoustacheMagnum&facialHairColor=BrownDark&clotheType=BlazerSweater&clotheColor=Black&eyeType=Default&eyebrowType=FlatNatural&mouthType=Default&skinColor=Tanned"
                 ></v-img>
@@ -58,10 +48,7 @@
           </v-layout>
         </v-timeline-item>
 
-        <v-timeline-item
-          color="pink"
-          small
-        >
+        <v-timeline-item color="pink" small>
           <v-layout pt-3>
             <v-flex xs3>
               <strong>12pm</strong>
@@ -72,10 +59,7 @@
           </v-layout>
         </v-timeline-item>
 
-        <v-timeline-item
-          color="teal lighten-3"
-          small
-        >
+        <v-timeline-item color="teal lighten-3" small>
           <v-layout pt-3>
             <v-flex xs3>
               <strong>9-11am</strong>

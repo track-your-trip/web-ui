@@ -41,7 +41,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    
+
     <v-navigation-drawer
       v-if="!hideToolbarRight"
       v-model="drawerRight"
@@ -54,10 +54,16 @@
     </v-navigation-drawer>
 
     <v-toolbar color="primary" dark fixed clipped-left clipped-right app>
-      <v-toolbar-side-icon @click.stop="drawerLeft = !drawerLeft"></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        @click.stop="drawerLeft = !drawerLeft"
+      ></v-toolbar-side-icon>
       <v-toolbar-title>Track Your Trip</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon v-if="!hideToolbarRight" @click.stop="drawerRight = !drawerRight" right></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        v-if="!hideToolbarRight"
+        @click.stop="drawerRight = !drawerRight"
+        right
+      ></v-toolbar-side-icon>
     </v-toolbar>
 
     <v-content>

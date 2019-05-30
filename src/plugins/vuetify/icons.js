@@ -9,7 +9,7 @@ export default {
       icon: ['fas', 'user-tie']
     }
   },
-  'map': {
+  map: {
     component: FontAwesomeIcon,
     props: {
       icon: ['fas', 'map']
