@@ -85,7 +85,7 @@ export default {
     },
 
     shareTrip(trip) {
-      console.log("Share Trip", trip)
+      console.log('Share Trip', trip)
     }
   }
 }

@@ -108,7 +108,7 @@ export default {
           })
           .catch(err => {
             console.log(err)
-            MessagesUtils.showGenericErrorNotification();
+            MessagesUtils.showGenericErrorNotification()
           })
       } else {
         this.$store
@@ -120,7 +120,7 @@ export default {
           })
           .catch(err => {
             console.log(err)
-            MessagesUtils.showGenericErrorNotification();
+            MessagesUtils.showGenericErrorNotification()
           })
       }
     },

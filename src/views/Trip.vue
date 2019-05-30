@@ -50,7 +50,7 @@ export default {
       let vm = this
 
       this.google.maps.event.addListener(this.map, 'click', function(event) {
-        console.log("HI")
+        console.log('HI')
         vm.placeMarker(event.latLng)
       })
 
@@ -88,8 +88,7 @@ export default {
     },
 
     loadTrip() {
-      TripApi.load(this.$route.params.id)
-        .then((trip) => this.trip = trip)
+      TripApi.load(this.$route.params.id).then(trip => (this.trip = trip))
     },
 
     onEditTrip() {

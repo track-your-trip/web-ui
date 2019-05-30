@@ -149,7 +149,7 @@ export default {
           this.$router.push('/login')
         })
         .catch(err => {
-          MessagesUtils.showGenericErrorNotification();
+          MessagesUtils.showGenericErrorNotification()
         })
     }
   }
