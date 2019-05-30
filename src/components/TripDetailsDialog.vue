@@ -94,8 +94,6 @@ export default {
 
   watch: {
     dialog(val) {
-      console.log(val ? 'open' : 'close')
-
       if (val) {
         // Dialog open
         if (this.trip) {
