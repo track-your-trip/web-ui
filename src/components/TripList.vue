@@ -5,6 +5,7 @@
       <v-spacer />
       <v-text-field
         v-model="search"
+        :disabled="$store.getters['trips/loading']"
         append-icon="search"
         label="Search"
         single-line
@@ -39,15 +40,17 @@
           </td>
         </template>
         <template v-slot:no-data>
-          <div class="text-xs-center">
-            <router-link :to="{ name: 'trip-create' }"
-              >Add your first trip</router-link
-            >
-          </div>
+          <v-layout justify-center>
+            <trip-details-dialog @save="onAddTrip">
+              <template v-slot:default="{ on }">
+                <v-btn color="primary" small block flat v-on="on">Add your first trip</v-btn>
+              </template>
+            </trip-details-dialog>
+          </v-layout>
         </template>
       </v-data-table>
 
-      <trip-details-dialog @save="onAddTrip">
+      <trip-details-dialog v-if="$store.getters['trips/trips'].length > 0" @save="onAddTrip">
         <template v-slot:default="{ on }">
           <v-btn color="primary" v-on="on">Add Trip</v-btn>
         </template>
