@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import auth from './store/auth.js'
-import settings from './store/settings.js'
-import trips from './store/trips.js'
+import auth from './modules/auth.js'
+import settings from './modules/settings.js'
+import trips from './modules/trips.js'
 
 Vue.use(Vuex)
 

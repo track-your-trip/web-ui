@@ -1,5 +1,5 @@
 <template>
-  <layout-app>
+  <layout-app hide-toolbar-right>
     <v-container fluid fill-height>
       <v-layout row fill-height>
         <v-flex xs12>

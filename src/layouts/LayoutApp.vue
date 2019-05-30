@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer
-      v-model="drawer"
+      v-model="drawerLeft"
       :mini-variant.sync="mini"
       fixed
       clipped
@@ -47,10 +47,23 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
+    
+    <v-navigation-drawer
+      v-if="!hideToolbarRight"
+      v-model="drawerRight"
+      right
+      fixed
+      clipped
+      app
+    >
+      <slot name="drawerRight" />
+    </v-navigation-drawer>
 
-    <v-toolbar color="primary" dark fixed clipped-left app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+    <v-toolbar color="primary" dark fixed clipped-left clipped-right app>
+      <v-toolbar-side-icon @click.stop="drawerLeft = !drawerLeft"></v-toolbar-side-icon>
       <v-toolbar-title>Track Your Trip</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-side-icon v-if="!hideToolbarRight" @click.stop="drawerRight = !drawerRight" right></v-toolbar-side-icon>
     </v-toolbar>
 
     <v-content>
@@ -62,12 +75,21 @@
 <script>
 export default {
   data: () => ({
-    drawer: null,
+    drawerLeft: null,
+    drawerRight: null,
     mini: false
   }),
 
   props: {
-    source: String
+    source: {
+      type: String,
+      required: false
+    },
+    hideToolbarRight: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   }
 }
 </script>

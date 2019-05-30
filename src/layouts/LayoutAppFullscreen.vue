@@ -7,5 +7,9 @@
         </v-flex>
       </v-layout>
     </v-container>
+
+    <template v-slot:drawerRight>
+      <slot name="drawerRight" />
+    </template>
   </layout-app>
 </template>
