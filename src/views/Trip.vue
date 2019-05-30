@@ -8,69 +8,7 @@
     <trip-details-dialog ref="refTripDetailsDialog" v-model="trip" />
 
     <template v-slot:drawerRight>
-      <v-timeline align-top dense>
-        <v-timeline-item color="pink" small>
-          <v-layout pt-3>
-            <v-flex xs3>
-              <strong>5pm</strong>
-            </v-flex>
-            <v-flex>
-              <strong>New Icon</strong>
-              <div class="caption">Mobile App</div>
-            </v-flex>
-          </v-layout>
-        </v-timeline-item>
-
-        <v-timeline-item color="teal lighten-3" small>
-          <v-layout wrap pt-3>
-            <v-flex xs3>
-              <strong>3-4pm</strong>
-            </v-flex>
-            <v-flex>
-              <strong>Design Stand Up</strong>
-              <div class="caption mb-2">Hangouts</div>
-              <v-avatar>
-                <v-img
-                  src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairFrida&accessoriesType=Kurt&hairColor=Red&facialHairType=BeardLight&facialHairColor=BrownDark&clotheType=GraphicShirt&clotheColor=Gray01&graphicType=Skull&eyeType=Wink&eyebrowType=RaisedExcitedNatural&mouthType=Disbelief&skinColor=Brown"
-                ></v-img>
-              </v-avatar>
-              <v-avatar>
-                <v-img
-                  src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairFrizzle&accessoriesType=Prescription02&hairColor=Black&facialHairType=MoustacheMagnum&facialHairColor=BrownDark&clotheType=BlazerSweater&clotheColor=Black&eyeType=Default&eyebrowType=FlatNatural&mouthType=Default&skinColor=Tanned"
-                ></v-img>
-              </v-avatar>
-              <v-avatar>
-                <v-img
-                  src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairMiaWallace&accessoriesType=Sunglasses&hairColor=BlondeGolden&facialHairType=Blank&clotheType=BlazerSweater&eyeType=Surprised&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Pale"
-                ></v-img>
-              </v-avatar>
-            </v-flex>
-          </v-layout>
-        </v-timeline-item>
-
-        <v-timeline-item color="pink" small>
-          <v-layout pt-3>
-            <v-flex xs3>
-              <strong>12pm</strong>
-            </v-flex>
-            <v-flex>
-              <strong>Lunch break</strong>
-            </v-flex>
-          </v-layout>
-        </v-timeline-item>
-
-        <v-timeline-item color="teal lighten-3" small>
-          <v-layout pt-3>
-            <v-flex xs3>
-              <strong>9-11am</strong>
-            </v-flex>
-            <v-flex>
-              <strong>Finish Home Screen</strong>
-              <div class="caption">Web App</div>
-            </v-flex>
-          </v-layout>
-        </v-timeline-item>
-      </v-timeline>
+      <location-timeline :locations="locations" :loading="loadingLocations" />
     </template>
   </layout-app-fullscreen>
 </template>
@@ -78,18 +16,24 @@
 <script>
 import TripSpeedDial from '~/components/TripSpeedDial.vue'
 import TripDetailsDialog from '~/components/TripDetailsDialog.vue'
+import LocationTimeline from '~/components/LocationTimeline.vue'
 import TripApi from '~/api/trips.js'
+import LocationApi from '~/api/locations.js'
 import gmapsInit from '~/utils/gmaps'
 
 export default {
   components: {
     TripSpeedDial,
-    TripDetailsDialog
+    TripDetailsDialog,
+    LocationTimeline
   },
 
   data() {
     return {
+      loadingTrip: false,
+      loadingLocations: false,
       trip: {},
+      locations: [],
       mode: '',
       google: null,
       map: null
@@ -102,7 +46,7 @@ export default {
       this.initNewTrip()
     } else {
       // a existing trip should be opened
-      this.loadTrip()
+      this.initExistingTrip()
     }
 
     try {
@@ -153,8 +97,39 @@ export default {
       this.onEditTrip()
     },
 
-    loadTrip() {
-      TripApi.load(this.$route.params.id).then(trip => (this.trip = trip))
+    initExistingTrip() {
+      let tripId = this.$route.params.id
+
+      this.loadTrip(tripId)
+      this.loadLocations(tripId)
+    },
+
+    loadTrip(id) {
+      this.loadingTrip = true
+
+      TripApi.load(id)
+        .then(trip => {
+          this.trip = trip
+          this.loadingTrip = false
+        })
+        .catch(() => {
+          this.trip = {}
+          this.loadingTrip = false
+        })
+    },
+
+    loadLocations(id) {
+      this.loadingLocations = true
+
+      LocationApi.list(id)
+        .then(locations => {
+          this.locations = locations
+          this.loadingLocations = false
+        })
+        .catch(() => {
+          this.locations = []
+          this.loadingLocations = false
+        })
     },
 
     onEditTrip() {

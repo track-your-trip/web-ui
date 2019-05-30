@@ -20,5 +20,11 @@ export default {
     props: {
       icon: ['fas', 'map-marked']
     }
+  },
+  'map-marker': {
+    component: FontAwesomeIcon,
+    props: {
+      icon: ['fas', 'map-marker']
+    }
   }
 }
