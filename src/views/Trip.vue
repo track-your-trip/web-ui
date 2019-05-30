@@ -2,8 +2,8 @@
   <layout-app-fullscreen>
     <div id="map"></div>
     <trip-speed-dial
-      @clickEditTrip="openTripDetails"
-      @clickAddLocation="openAddLocation"
+      @click:edit-trip="onEditTrip"
+      @click:add-location="onAddLocation"
     />
     <trip-details-dialog ref="refTripDetailsDialog" v-model="trip" />
   </layout-app-fullscreen>
@@ -12,7 +12,7 @@
 <script>
 import TripSpeedDial from '../components/TripSpeedDial.vue'
 import TripDetailsDialog from '../components/TripDetailsDialog.vue'
-import TripUtils from '../utils/trips.js'
+import TripApi from '../api/trips.js'
 import gmapsInit from '../utils/gmaps'
 
 export default {
@@ -23,7 +23,10 @@ export default {
 
   data() {
     return {
-      trip: {}
+      trip: {},
+      mode: '',
+      google: null,
+      map: null
     }
   },
 
@@ -37,11 +40,18 @@ export default {
     }
 
     try {
-      const google = await gmapsInit()
-      const geocoder = new google.maps.Geocoder()
-      const map = new google.maps.Map(document.getElementById('map'), {
+      this.google = await gmapsInit()
+      const geocoder = new this.google.maps.Geocoder()
+      this.map = new this.google.maps.Map(document.getElementById('map'), {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8
+      })
+
+      let vm = this
+
+      this.google.maps.event.addListener(this.map, 'click', function(event) {
+        console.log("HI")
+        vm.placeMarker(event.latLng)
       })
 
       /*
@@ -65,6 +75,12 @@ export default {
     }
   },
 
+  computed: {
+    isModeAddMarker() {
+      return this.mode === 'ADD_MARKER'
+    }
+  },
+
   methods: {
     initNewTrip() {
       this.trip = {}
@@ -72,16 +88,24 @@ export default {
     },
 
     loadTrip() {
-      TripUtils.load(this.$route.params.id)
+      TripApi.load(this.$route.params.id)
         .then((trip) => this.trip = trip)
     },
 
-    openTripDetails() {
+    onEditTrip() {
       this.$refs.refTripDetailsDialog.open()
     },
 
-    openAddLocation() {
+    onAddLocation() {
       console.log('open add location dialog')
+      this.mode === 'ADD_MARKER'
+    },
+
+    placeMarker(location) {
+      let marker = new this.google.maps.Marker({
+        position: location,
+        map: this.map
+      })
     }
   }
 }

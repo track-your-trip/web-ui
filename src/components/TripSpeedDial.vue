@@ -12,7 +12,7 @@
         <v-icon>close</v-icon>
       </v-btn>
     </template>
-    <v-btn fab dark small color="primary" @click="$emit('clickEditTrip')">
+    <v-btn fab dark small color="primary" @click="$emit('click:edit-trip')">
       <v-icon>edit</v-icon>
     </v-btn>
     <v-btn
@@ -20,8 +20,7 @@
       dark
       small
       color="primary"
-      @click="$emit('clickAddLocation')"
-      disabled
+      @click="$emit('click:add-location')"
     >
       <v-icon>fas fa-map-marked</v-icon>
     </v-btn>
@@ -35,12 +34,6 @@ export default {
       fab: false
     }
   },
-
-  methods: {
-    save() {
-      console.log('save', this.name, this.description)
-    }
-  }
 }
 </script>
 

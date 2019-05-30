@@ -1,5 +1,4 @@
-import axios from 'axios'
-import TripUtils from '../utils/trips.js'
+import TripApi from '../api/trips.js'
 
 export default {
   namespaced: true,
@@ -38,7 +37,7 @@ export default {
   actions: {
     load({ commit }) {
       commit('request')
-      TripUtils.list()
+      TripApi.list()
         .then(trips => {
           commit('setTrips', trips)
           commit('success')
@@ -50,7 +49,7 @@ export default {
       return new Promise((resolve, reject) => {
         commit('request')
 
-        TripUtils.store(trip).then(trip => {
+        TripApi.store(trip).then(trip => {
           commit('addTrip', trip)
           commit('success')
           resolve(trip)
@@ -62,7 +61,7 @@ export default {
       return new Promise((resolve, reject) => {
         commit('request')
 
-        TripUtils.update(trip).then(trip => {
+        TripApi.update(trip).then(trip => {
           commit('updateTrip', trip)
           commit('success')
           resolve(trip)
@@ -73,7 +72,7 @@ export default {
     delete({ commit, dispatch }, id) {
       commit('request')
 
-      TripUtils.destroy(id).then(() => {
+      TripApi.destroy(id).then(() => {
         commit('removeTrip', id)
         commit('success')
       })
