@@ -33,7 +33,7 @@
 
         <v-list-tile :to="{ name: 'trips' }">
           <v-list-tile-action>
-            <v-icon>fas fa-map</v-icon>
+            <v-icon>$vuetify.icons.map</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Trips</v-list-tile-title>

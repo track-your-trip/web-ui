@@ -16,7 +16,7 @@
       <v-icon>edit</v-icon>
     </v-btn>
     <v-btn fab dark small color="primary" @click="$emit('click:add-location')">
-      <v-icon>fas fa-map-marked</v-icon>
+      <v-icon small>$vuetify.icons.map-marked</v-icon>
     </v-btn>
   </v-speed-dial>
 </template>

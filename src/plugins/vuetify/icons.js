@@ -8,5 +8,17 @@ export default {
     props: {
       icon: ['fas', 'user-tie']
     }
+  },
+  'map': {
+    component: FontAwesomeIcon,
+    props: {
+      icon: ['fas', 'map']
+    }
+  },
+  'map-marked': {
+    component: FontAwesomeIcon,
+    props: {
+      icon: ['fas', 'map-marked']
+    }
   }
 }

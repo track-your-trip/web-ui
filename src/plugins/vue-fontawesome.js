@@ -2,7 +2,9 @@ import Vue from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import {
-  faUserTie as fasUserTie
+  faUserTie as fasUserTie,
+  faMap as fasMap,
+  faMapMarked as fasMapMarked
 } from '@fortawesome/free-solid-svg-icons'
 // import { far } from '@fortawesome/free-regular-svg-icons'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -15,7 +17,9 @@ import {
 
 // fontawesome solid icons
 library.add(
-  fasUserTie
+  fasUserTie,
+  fasMap,
+  fasMapMarked
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
