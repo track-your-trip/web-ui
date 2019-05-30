@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TripList from '../components/TripList.vue'
+import TripList from '~/components/TripList.vue'
 
 export default {
   components: {

@@ -107,7 +107,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import MessagesUtils from '../utils/messages'
+import MessagesUtils from '~/utils/messages'
 
 export default {
   components: {

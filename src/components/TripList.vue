@@ -73,12 +73,9 @@ export default {
       this.$store.dispatch('trips/load')
     },
 
-    async deleteTrip(trip) {
+    deleteTrip(trip) {
       if (
-        await this.$dialog.warning({
-          text: 'Would you really like to delete the trip "' + trip.name + '"?',
-          title: 'Confirm deletion'
-        })
+        confirm('Would you really like to delete the trip "' + trip.name + '"?')
       ) {
         this.$store.dispatch('trips/delete', trip.id)
       }

@@ -121,9 +121,8 @@ export default {
         })
         .catch(err => {
           if (err.response.status !== 401) {
-            this.$dialog.notify.error(err, {
-              position: 'top-right'
-            })
+            // TODO Find better way than console...
+            console.error('An error occured. Please try again later.')
           }
         })
     }

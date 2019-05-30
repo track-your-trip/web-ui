@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from './store/index'
+import store from '~/store/index.js'
 
-import Dashboard from './views/Dashboard.vue'
+import Dashboard from '~/views/Dashboard.vue'
 
-import Trips from './views/Trips.vue'
-import Trip from './views/Trip.vue'
+import Trips from '~/views/Trips.vue'
+import Trip from '~/views/Trip.vue'
 
-import Login from './views/Login.vue'
-import Register from './views/Register.vue'
-import NotFound from './views/NotFound.vue'
+import Login from '~/views/Login.vue'
+import Register from '~/views/Register.vue'
+import NotFound from '~/views/NotFound.vue'
 
 Vue.use(Router)
 

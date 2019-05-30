@@ -92,10 +92,10 @@
 </template>
 
 <script>
-import TripSpeedDial from '../components/TripSpeedDial.vue'
-import TripDetailsDialog from '../components/TripDetailsDialog.vue'
-import TripApi from '../api/trips.js'
-import gmapsInit from '../utils/gmaps'
+import TripSpeedDial from '~/components/TripSpeedDial.vue'
+import TripDetailsDialog from '~/components/TripDetailsDialog.vue'
+import TripApi from '~/api/trips.js'
+import gmapsInit from '~/utils/gmaps'
 
 export default {
   components: {
