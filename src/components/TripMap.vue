@@ -6,7 +6,7 @@
       :loading="loading"
       @update:trip="$emit('update:trip', $event)"
       @click:edit-trip="onEditTrip"
-      @click:add-location="onAddLocation"
+      @click:add-location="$emit('click:add-location')"
     />
   </v-container>
 </template>

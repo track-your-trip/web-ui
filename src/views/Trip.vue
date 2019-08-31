@@ -1,9 +1,9 @@
 <template>
   <layout-app-fullscreen>
-    <trip-map :trip="trip" :loading="loadingTrip" @update:trip="onUpdateTrip" />
+    <trip-map :trip="trip" :loading="loadingTrip" @update:trip="onUpdateTrip" @store:location="onStoreLocation" />
 
     <template v-slot:drawerRight>
-      <location-timeline :locations="locations" :loading="loadingLocations" />
+      <location-timeline :locations="locations" :loading="loadingLocations" @store:location="onStoreLocation" />
     </template>
   </layout-app-fullscreen>
 </template>
@@ -51,6 +51,10 @@ export default {
         this.trip = trip
         this.loadingTrip = false
       })
+    },
+
+    onStoreLocation(location) {
+      console.log("Store Location", location)
     },
 
     loadTrip(id) {

@@ -5,7 +5,7 @@
     </v-layout>
 
     <v-layout v-else-if="locations.length === 0" align-center justify-center>
-      No locations found
+      <v-btn color="primary" small @click="$emit('click:add-location')">Add your first location</v-btn>
     </v-layout>
 
     <v-timeline v-else align-top dense>

@@ -2,11 +2,13 @@ import Vue from 'vue'
 import '~/plugins/axios'
 import '~/plugins/jquery'
 import '~/plugins/vee-validate'
+import '~/plugins/vue-moment'
 import '~/plugins/vue-fontawesome'
 import '~/plugins/vuetify/vuetify'
 import App from './App.vue'
 import router from '~/router'
 import store from '~/store/index.js'
+import '~/filter/index.js'
 import '~/registerServiceWorker'
 
 // Import layouts

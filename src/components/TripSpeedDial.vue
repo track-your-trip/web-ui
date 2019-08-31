@@ -40,26 +40,35 @@
       </template>
     </trip-details-dialog>
 
-    <v-btn
-      :disabled="loading"
-      :loading="loading"
-      fab
-      dark
-      small
-      color="primary"
-      @click="$emit('click:add-location')"
+    <location-details-dialog
+      text-save="Update"
+      @save="$emit('store:location', $event)"
     >
-      <v-icon small>$vuetify.icons.map-marked</v-icon>
-    </v-btn>
+      <template v-slot:default="{ on }">
+        <v-btn
+          :disabled="loading"
+          :loading="loading"
+          fab
+          dark
+          small
+          color="primary"
+          v-on="on"
+        >
+          <v-icon small>$vuetify.icons.map-marked</v-icon>
+        </v-btn>
+      </template>
+    </location-details-dialog>
   </v-speed-dial>
 </template>
 
 <script>
 import TripDetailsDialog from '~/components/TripDetailsDialog.vue'
+import LocationDetailsDialog from '~/components/LocationDetailsDialog.vue'
 
 export default {
   components: {
-    TripDetailsDialog
+    TripDetailsDialog,
+    LocationDetailsDialog
   },
 
   props: {
