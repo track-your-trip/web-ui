@@ -42,7 +42,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ['@nuxtjs/apollo'],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -65,12 +65,51 @@ export default {
     }
   },
   /*
+   ** apollo module configuration
+   ** https://github.com/nuxt-community/apollo-module
+   */
+  apollo: {
+    includeNodeModules: true, // optional, default: false (this includes graphql-tag for node_modules folder)
+    authenticationType: 'Bearer', // optional, default: 'Bearer'
+    // required
+    clientConfigs: {
+      default: {
+        // required
+        httpEndpoint: 'http://localhost:80',
+        // optional
+        // override HTTP endpoint in browser only
+        browserHttpEndpoint: '/graphql',
+        // optional
+        // See https://www.apollographql.com/docs/link/links/http.html#options
+        httpLinkOptions: {
+          credentials: 'same-origin'
+        },
+        // You can use `wss` for secure connection (recommended in production)
+        // Use `null` to disable subscriptions
+        wsEndpoint: null, // optional
+        // LocalStorage token
+        tokenName: 'apollo-token', // optional
+        // Enable Automatic Query persisting with Apollo Engine
+        persisting: false, // Optional
+        // Use websockets for everything (no HTTP)
+        // You need to pass a `wsEndpoint` for this to work
+        websocketsOnly: false // Optional
+      },
+      dev: {
+        httpEndpoint: 'https://api.dev.track-your-trip.com',
+      },
+      prod: {
+        httpEndpoint: 'https://api.prod.track-your-trip.com'
+      }
+    }
+  },
+  /*
    ** Build configuration
    */
   build: {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) { }
   }
 }
