@@ -14,6 +14,11 @@
   "lint-staged": {
     "*.{js,vue}": "npm run lint"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "nuxt": "^2.0.0"
   },
