@@ -1,12 +1,14 @@
 <template>
-  <v-container pa-0 fill-height>
-    <v-layout v-if="loading" align-center justify-center>
+  <v-container class="pa-0 fill-height">
+    <v-row v-if="loading" align="center" justify="center">
       <v-progress-circular indeterminate color="primary" size="50" />
-    </v-layout>
+    </v-row>
 
-    <v-layout v-else-if="locations.length === 0" align-center justify-center>
-      <v-btn color="primary" small @click="$emit('click:add-location')">Add your first location</v-btn>
-    </v-layout>
+    <v-row v-else-if="locations.length === 0" align="center" justify="center">
+      <v-btn color="primary" small @click="$emit('click:add-location')"
+        >Add your first location</v-btn
+      >
+    </v-row>
 
     <v-timeline v-else align-top dense>
       <item
@@ -19,7 +21,7 @@
 </template>
 
 <script>
-import Item from '~/components/LocationTimelineItem.vue'
+import Item from '@/components/LocationTimelineItem.vue'
 
 export default {
   props: {

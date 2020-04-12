@@ -53,18 +53,18 @@
       <slot name="drawerRight" />
     </v-navigation-drawer>
 
-    <v-toolbar color="primary" dark fixed clipped-left clipped-right app>
-      <v-toolbar-side-icon
+    <v-app-bar color="primary" dark fixed clipped-left clipped-right app>
+      <v-app-bar-nav-icon
         @click.stop="drawerLeft = !drawerLeft"
-      ></v-toolbar-side-icon>
+      ></v-app-bar-nav-icon>
       <v-toolbar-title>Track Your Trip</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon
+      <v-app-bar-nav-icon
         v-if="!hideToolbarRight"
         @click.stop="drawerRight = !drawerRight"
         right
-      ></v-toolbar-side-icon>
-    </v-toolbar>
+      ></v-app-bar-nav-icon>
+    </v-app-bar>
 
     <v-content>
       <slot />

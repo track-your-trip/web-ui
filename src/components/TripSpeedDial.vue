@@ -15,10 +15,21 @@
         dark
         fab
       >
-        <v-icon>edit</v-icon>
-        <v-icon>close</v-icon>
+        <v-icon v-if="fab">edit</v-icon>
+        <v-icon v-else>close</v-icon>
       </v-btn>
     </template>
+        <v-btn
+          :disabled="loading"
+          :loading="loading"
+          fab
+          dark
+          small
+          color="primary"
+          v-on="on"
+        >
+          <v-icon>edit</v-icon>
+        </v-btn>
 
     <trip-details-dialog
       :trip="trip"
@@ -62,8 +73,8 @@
 </template>
 
 <script>
-import TripDetailsDialog from '~/components/TripDetailsDialog.vue'
-import LocationDetailsDialog from '~/components/LocationDetailsDialog.vue'
+import TripDetailsDialog from '@/components/TripDetailsDialog.vue'
+import LocationDetailsDialog from '@/components/LocationDetailsDialog.vue'
 
 export default {
   components: {

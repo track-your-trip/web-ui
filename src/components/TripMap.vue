@@ -1,5 +1,5 @@
 <template>
-  <v-container fill-height pa-0>
+  <v-container class="fill-height pa-0">
     <div id="map"></div>
     <trip-speed-dial
       :trip="trip"
@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import TripSpeedDial from '~/components/TripSpeedDial.vue'
+import TripSpeedDial from '@/components/TripSpeedDial.vue'
 
-import gmapsInit from '~/utils/gmaps'
+import gmapsInit from '@/utils/gmaps'
 
 export default {
   components: {

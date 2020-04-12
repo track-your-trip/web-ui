@@ -1,11 +1,11 @@
-const path = require('path')
-
 module.exports = {
   transpileDependencies: ['vuetify'],
   configureWebpack: {
-    resolve: {
-      alias: {
-        '~': path.resolve(__dirname, 'src')
+    devtool: 'source-map',
+    optimization: {
+      splitChunks: {
+        minSize: 10000,
+        maxSize: 250000
       }
     }
   }

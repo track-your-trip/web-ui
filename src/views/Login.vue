@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md4>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="4">
             <ValidationObserver ref="observer" v-slot="{ invalid }">
               <v-card>
                 <v-toolbar dark color="primary">
@@ -73,8 +73,8 @@
                 </v-card-actions>
               </v-card>
             </ValidationObserver>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </v-content>
   </v-app>

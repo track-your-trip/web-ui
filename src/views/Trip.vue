@@ -1,19 +1,28 @@
 <template>
   <layout-app-fullscreen>
-    <trip-map :trip="trip" :loading="loadingTrip" @update:trip="onUpdateTrip" @store:location="onStoreLocation" />
+    <trip-map
+      :trip="trip"
+      :loading="loadingTrip"
+      @update:trip="onUpdateTrip"
+      @store:location="onStoreLocation"
+    />
 
     <template v-slot:drawerRight>
-      <location-timeline :locations="locations" :loading="loadingLocations" @store:location="onStoreLocation" />
+      <location-timeline
+        :locations="locations"
+        :loading="loadingLocations"
+        @store:location="onStoreLocation"
+      />
     </template>
   </layout-app-fullscreen>
 </template>
 
 <script>
-import TripMap from '~/components/TripMap.vue'
-import LocationTimeline from '~/components/LocationTimeline.vue'
+import TripMap from '@/components/TripMap.vue'
+import LocationTimeline from '@/components/LocationTimeline.vue'
 
-import TripApi from '~/api/trips.js'
-import LocationApi from '~/api/locations.js'
+import TripApi from '@/api/trips.js'
+import LocationApi from '@/api/locations.js'
 
 export default {
   components: {
@@ -54,7 +63,7 @@ export default {
     },
 
     onStoreLocation(location) {
-      console.log("Store Location", location)
+      console.log('Store Location', location)
     },
 
     loadTrip(id) {

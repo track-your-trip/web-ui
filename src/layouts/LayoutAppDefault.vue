@@ -1,11 +1,11 @@
 <template>
   <layout-app hide-toolbar-right>
-    <v-container fluid fill-height>
-      <v-layout row fill-height>
-        <v-flex xs12>
+    <v-container class="fill-height" fluid>
+      <v-row class="fill-height">
+        <v-col cols="12">
           <slot />
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-container>
   </layout-app>
 </template>

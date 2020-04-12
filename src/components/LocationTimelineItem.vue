@@ -1,20 +1,20 @@
 <template>
   <v-timeline-item small fill-dot icon="$vuetify.icons.map-marker">
-    <v-layout column pt-3 pr-3>
-      <v-flex xs12 class="font-weight-bold">
+    <v-row class="pt-3 pr-3" column>
+      <v-col cols="12" class="font-weight-bold">
         {{ location.beginn }} - {{ location.end }}
-      </v-flex>
-      <v-flex xs12>
+      </v-col>
+      <v-col cols="12">
         <div class="subheading">{{ location.name }}</div>
-      </v-flex>
-      <v-flex xs12>
+      </v-col>
+      <v-col cols="12">
         <div class="caption">{{ location.description }}</div>
-      </v-flex>
-      <v-flex xs12>
-        <v-btn small flat color="primary" @click="onClickShow">Show</v-btn>
-        <v-btn small flat color="error" @click="onClickDelete">Delete</v-btn>
-      </v-flex>
-    </v-layout>
+      </v-col>
+      <v-col cols="12">
+        <v-btn small text color="primary" @click="onClickShow">Show</v-btn>
+        <v-btn small text color="error" @click="onClickDelete">Delete</v-btn>
+      </v-col>
+    </v-row>
   </v-timeline-item>
 </template>
 

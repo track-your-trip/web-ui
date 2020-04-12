@@ -65,7 +65,7 @@
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 
-import DateRangePickerDefault from '~/components/DateRangePickerDefault.vue'
+import DateRangePickerDefault from '@/components/DateRangePickerDefault.vue'
 
 export default {
   components: {

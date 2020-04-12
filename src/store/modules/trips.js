@@ -1,4 +1,4 @@
-import TripApi from '~/api/trips.js'
+import TripApi from '@/api/trips.js'
 
 export default {
   namespaced: true,

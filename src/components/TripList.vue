@@ -18,39 +18,42 @@
         :items="$store.getters['trips/trips']"
         :search="search"
         :loading="$store.getters['trips/loading']"
-      >
-        <template v-slot:items="props">
-          <td class="text-xs-left">{{ props.item.name }}</td>
-          <td class="text-xs-left">{{ props.item.description }}</td>
-          <td class="text-xs-left">
-            <v-btn
-              flat
-              small
-              icon
-              :to="{ name: 'trip', params: { id: props.item.id } }"
-            >
-              <v-icon small>remove_red_eye</v-icon>
-            </v-btn>
-            <v-btn flat small icon @click="shareTrip(props.item)">
-              <v-icon small>share</v-icon>
-            </v-btn>
-            <v-btn flat small icon @click="deleteTrip(props.item)">
-              <v-icon small>delete</v-icon>
-            </v-btn>
-          </td>
-        </template>
+      >    
         <template v-slot:no-data>
-          <v-layout justify-center>
+          <v-row justify="center">
             <trip-details-dialog @save="onAddTrip">
               <template v-slot:default="{ on }">
-                <v-btn color="primary" small block flat v-on="on">Add your first trip</v-btn>
+                <v-btn color="primary" small block text v-on="on"
+                  >Add your first trip</v-btn
+                >
               </template>
             </trip-details-dialog>
-          </v-layout>
+          </v-row>
+        </template>
+
+        <!-- action -->
+        <template v-slot:item.action="{ item }">
+          <v-btn
+            text
+            small
+            icon
+            :to="{ name: 'trip', params: { id: item.id } }"
+          >
+            <v-icon small>remove_red_eye</v-icon>
+          </v-btn>
+          <v-btn text small icon @click="shareTrip(item)">
+            <v-icon small>share</v-icon>
+          </v-btn>
+          <v-btn text small icon @click="deleteTrip(item)">
+            <v-icon small>delete</v-icon>
+          </v-btn>
         </template>
       </v-data-table>
 
-      <trip-details-dialog v-if="$store.getters['trips/trips'].length > 0" @save="onAddTrip">
+      <trip-details-dialog
+        v-if="$store.getters['trips/trips'].length > 0"
+        @save="onAddTrip"
+      >
         <template v-slot:default="{ on }">
           <v-btn color="primary" v-on="on">Add Trip</v-btn>
         </template>
@@ -60,7 +63,7 @@
 </template>
 
 <script>
-import TripDetailsDialog from '~/components/TripDetailsDialog.vue'
+import TripDetailsDialog from '@/components/TripDetailsDialog.vue'
 
 export default {
   components: {
@@ -70,9 +73,9 @@ export default {
   data() {
     return {
       headers: [
-        { text: 'Name', value: 'name', sortable: false },
+        { text: 'Name', value: 'name', sortable: true },
         { text: 'Description', value: 'description', sortable: false },
-        { text: 'Actions', value: 'name', sortable: false }
+        { text: 'Actions', value: 'action', sortable: false }
       ],
       search: ''
     }
