@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/vue-i18n.js', '~/plugins/vee-validate.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -50,7 +50,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -75,10 +75,7 @@ export default {
     clientConfigs: {
       default: {
         // required
-        httpEndpoint: 'http://localhost:80',
-        // optional
-        // override HTTP endpoint in browser only
-        browserHttpEndpoint: '/graphql',
+        httpEndpoint: 'http://localhost:80/graphql',
         // optional
         // See https://www.apollographql.com/docs/link/links/http.html#options
         httpLinkOptions: {
@@ -96,7 +93,7 @@ export default {
         websocketsOnly: false // Optional
       },
       dev: {
-        httpEndpoint: 'https://api.dev.track-your-trip.com',
+        httpEndpoint: 'https://api.dev.track-your-trip.com'
       },
       prod: {
         httpEndpoint: 'https://api.prod.track-your-trip.com'
@@ -110,6 +107,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) { }
+    extend(config, ctx) {}
   }
 }

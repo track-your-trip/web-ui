@@ -1,0 +1,11 @@
+{
+  "misc": {
+    "submit": "Submit",
+    "login": "Login"
+  },
+  "login": {
+    "title": "Login",
+    "email": "E-Mail",
+    "password": "Password"
+  }
+}
